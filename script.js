@@ -75,3 +75,40 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+
+// /////////////////////// Simple Array Methods /////////////////////////
+
+// let alphabet5 = ['a', 'b', 'c', 'd', 'e'];
+
+// // SLICE
+// console.log(alphabet5.slice(2));
+// console.log(alphabet5.slice(1, 3));
+// console.log(alphabet5.slice(-2));
+// console.log(alphabet5.slice(1, -2));
+// console.log(alphabet5.slice());
+// console.log([...alphabet5]);
+
+// // SPLICE(startIndex, deleteCount) --deletes element from and no of (Change the original Array)
+// console.log(alphabet5.splice(4));
+// console.log(alphabet5);
+// console.log(alphabet5.splice(2, 3));
+// console.log(alphabet5.splice(-2, 1));
+// console.log(alphabet5);
+// console.log(alphabet5.splice(-2))
+
+// // REVERSE -- changes the original array
+// alphabet5 = ['a', 'b', 'c', 'd', 'e'];
+// const alphabet10 = ['f', 'g', 'h', 'j', 'k'];
+// // console.log(alphabet5.reverse());
+// // console.log(alphabet10.reverse());
+// // console.log(alphabet10);
+
+// // CONCAT
+// let alphabetETC = ['l', 'm', 'n'];
+// const letter = alphabet5.concat(alphabet10, alphabetETC);
+// console.log(letter);
+// console.log([...alphabet5, ...alphabet10]);
+
+// // JOIN
+// console.log(letter.join(' - '));
+
