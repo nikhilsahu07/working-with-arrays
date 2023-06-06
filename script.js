@@ -274,3 +274,37 @@ createUsernames(accounts);
 // const withdrawal = movements.filter(movWithdrawal => movWithdrawal < 0);
 // console.log(withdrawal);
 
+
+// ///////////////////////// The reduce Method //////////////////////////////
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//     console.log(`Iteration ${i}: ${acc}`);
+
+//     return acc + cur
+// }, 0);
+// console.log(balance);
+
+// let balance2 = 0;
+// for (const value of movements) balance2 += value;
+// console.log(balance2);
+
+const calcDisplayBalance = function (accMovements) {
+    const balance = accMovements.reduce(function (acc, cur) {
+        return acc + cur;
+    }, 0);
+    labelBalance.textContent = `${balance}€`;
+}
+calcDisplayBalance(account1.movements)
+
+// // Maximum Value
+// const maximum = movements.reduce((acc, cur) => {
+//     if (acc > cur) {
+//         return acc;
+//     } else {
+//         return cur;
+//     }
+// }, movements.at(0));
+// console.log(maximum);
+
