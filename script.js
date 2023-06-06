@@ -230,3 +230,28 @@ displayMovements(account1.movements);
 // })
 // console.log(movementsDescriptions);
 
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// Computing Usernames in Our App /////////////////////
+const createUsernames = function (accs) {
+    accs.forEach(function (acc) {
+        acc.username = acc.owner
+            .toLowerCase()
+            .split(' ')
+            .map(n => n.at(0))
+            .join('');
+    })
+}
+createUsernames(accounts);
+console.log(accounts);
+
+
+// const user = 'Nikhil Kumar Sahu';
+// const username = user
+//     .toLowerCase()
+//     .split(' ')
+//     .map(n => n.at(0))
+//     .join('');
+
+// console.log(username);
+
+//////////////////////////////////////////////////////////////////////
