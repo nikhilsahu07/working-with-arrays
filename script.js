@@ -182,3 +182,25 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // })
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////// Creating DOM Elements ////////////////////////////////
+
+const displayMovements = function (movements) {
+    containerMovements.innerHTML = ``; //innHTML returns the whole div class with their tags.. the whole html
+    // containerMovements.textContent = ``; //it only returns the text inside the tags
+    movements.forEach(function (mov, i) {
+        const transferType = mov > 0 ? 'deposit' : 'withdrawal';
+        const movmentHtmlRow = `
+        <div class="movements__row">
+            <div class="movements__type movements__type--${transferType}">${i} ${transferType}</div>
+            <div class="movements__value">${mov}€</div>
+        </div>`;
+
+        containerMovements.insertAdjacentHTML('afterbegin', movmentHtmlRow);
+
+    })
+}
+displayMovements(account1.movements);
+
