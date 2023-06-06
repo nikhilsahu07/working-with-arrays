@@ -204,3 +204,29 @@ const displayMovements = function (movements) {
 }
 displayMovements(account1.movements);
 
+// //////////////////// The MAP Method //////////////////////////
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// const eurToUsd = 1.1;
+// // Difference b/w map and forEach is Map create brand new Array
+// const movementsInUsd = movements.map(function (movInEur) {
+//     return movInEur * eurToUsd
+// })
+// console.log(movementsInUsd);
+// console.log(movements);
+
+// const movementsInUsd2 = movements.map(movInEur => movInEur * eurToUsd)
+// console.log(movementsInUsd2);
+
+// const movementsInUsdFor = [];
+// for (const movInEur of movements) {
+//     movementsInUsdFor.push(movInEur * eurToUsd)
+// }
+// console.log(movementsInUsdFor);
+
+// const movementsDescriptions = movements.map((movInEur, i, arrItself) => {
+//     return (`Movement ${i + 1}: You ${movInEur > 0 ? 'deposited' : 'withdrawal'} ${movInEur}`)
+// })
+// console.log(movementsDescriptions);
+
