@@ -290,11 +290,11 @@ createUsernames(accounts);
 // for (const value of movements) balance2 += value;
 // console.log(balance2);
 
-const calcDisplayBalance = function (accMovements) {
-    const balance = accMovements.reduce(function (acc, cur) {
+const calcDisplayBalance = function (acc) {
+    acc.balance = acc.movements.reduce(function (acc, cur) {
         return acc + cur;
     }, 0);
-    labelBalance.textContent = `${balance}€`;
+    labelBalance.textContent = `${acc.balance}€`;
 }
 // calcDisplayBalance(account1.movements)
 
@@ -368,6 +368,17 @@ const calcDisplaySummary = function (account) {
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////// Implementing Login //////////////////////////
 
+const updateUI = function (acc) {
+    // Display movements
+    displayMovements(acc.movements);
+
+    // Display Balance
+    calcDisplayBalance(acc);
+
+    // Display Summary
+    calcDisplaySummary(acc);
+}
+
 // Event Listener
 let currentAccount;
 
@@ -377,20 +388,14 @@ btnLogin.addEventListener('click', function (e) {
     // console.log('LOGINED');
     currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
     if (Number(inputLoginPin.value) === currentAccount?.pin) {
-        console.log(`LOGINED AS ${currentAccount.owner}`);
+        // console.log(`LOGINED AS ${currentAccount.owner}`);
 
         // Display UI and message
         labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ').at(0)}👋`;
         containerApp.style.opacity = 100;
 
-        // Display movements
-        displayMovements(currentAccount.movements);
-
-        // Display Balance
-        calcDisplayBalance(currentAccount.movements);
-
-        // Display Summary
-        calcDisplaySummary(currentAccount);
+        // UpdateUI
+        updateUI(currentAccount);
 
         // Clear input Username PIN
         inputLoginUsername.value = inputLoginPin.value = ``;
@@ -406,4 +411,42 @@ btnLogin.addEventListener('click', function (e) {
     }
 });
 
+
+
+///////////////////// Implementing Transfers ///////////////////////////
+
+btnTransfer.addEventListener('click', function (e) {
+    e.preventDefault();
+    const transferAmount = inputTransferAmount.value;
+    const recieverAccount = accounts.find(acc => inputTransferTo.value === acc.username)
+
+    inputTransferAmount.value = inputTransferTo.value = ``;
+    inputTransferAmount.blur();
+
+    if (transferAmount > 0
+        && recieverAccount
+        && currentAccount.balance >= transferAmount
+        && recieverAccount.username !== currentAccount.username
+    ) {
+        currentAccount.movements.push(Number(-transferAmount));
+        recieverAccount.movements.push(Number(transferAmount));
+
+        // Update UI
+        updateUI(currentAccount);
+        // console.log(accounts);
+
+        alert(`Amount of ${transferAmount} has been successfully transfered to ${recieverAccount.owner}.💸`)
+
+    } else {
+        if (!recieverAccount) {
+            alert(`Reciever ${inputTransferTo.value}does NOT exist in Bankist.🚫`)
+        } else if (currentAccount.balance < transferAmount) {
+            alert(`Unsufficient balance.📉`)
+        } else if (recieverAccount.username === currentAccount.username) {
+            alert(`You can't transfer your money to yourself.🚫`)
+        }
+
+    }
+
+});
 
