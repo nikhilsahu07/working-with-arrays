@@ -308,3 +308,44 @@ calcDisplayBalance(account1.movements)
 // }, movements.at(0));
 // console.log(maximum);
 
+
+// //////////////////////// The Magic of Chaining ////////////////////////
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const eurToUsd = 1.1;
+
+// // PIPELINES
+// const totalDepositsInUsd = movements
+//     .filter(mov => mov > 0)
+//     .map((mov, i, arr) => {
+//         // console.log(arr);
+//         return mov * eurToUsd
+//     })
+//     // .map(mov => mov * eurToUsd)
+//     .reduce((acc, cur) => acc + cur, 0);
+// console.log(totalDepositsInUsd);
+
+
+const calcDisplaySummary = function (movements) {
+    const income = movements
+        .filter(mov => mov > 0)
+        .reduce((acc, curMov) => acc + curMov, 0);
+    labelSumIn.textContent = `${income}€`;
+
+    const outcome = movements
+        .filter(mov => mov < 0)
+        .reduce((acc, curMov) => acc + curMov, 0);
+    labelSumOut.textContent = `${Math.abs(outcome)}€`;
+
+    const interest = movements
+        .filter(mov => mov > 0)
+        .map(deposit => (deposit * 1.2) / 100)
+        .filter(interest => interest > 1)
+        .reduce((acc, deposit) => acc + deposit, 0)
+    labelSumInterest.textContent = `${(interest)}€`
+}
+calcDisplaySummary(account1.movements)
+
+// REMARKS: We should not overuse chaining one after other, it can cause performance issue and debugging problem
+// We should it opitmizely use.
+// Its bad practice to chain methods that mutate original object like splice and reverse method on long run it cause errors
