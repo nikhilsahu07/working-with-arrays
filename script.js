@@ -6,7 +6,7 @@
 
 // Data
 const account1 = {
-    owner: 'Nikhil Sahu',
+    owner: 'Nikhil Kumar Sahu',
     movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
     interestRate: 1.2, // %
     pin: 1111,
@@ -194,7 +194,7 @@ const displayMovements = function (movements) {
         const transferType = mov > 0 ? 'deposit' : 'withdrawal';
         const movmentHtmlRow = `
         <div class="movements__row">
-            <div class="movements__type movements__type--${transferType}">${i} ${transferType}</div>
+            <div class="movements__type movements__type--${transferType}">${i + 1} ${transferType}</div>
             <div class="movements__value">${mov}€</div>
         </div>`;
 
@@ -202,7 +202,7 @@ const displayMovements = function (movements) {
 
     })
 }
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 // //////////////////// The MAP Method //////////////////////////
 
@@ -296,7 +296,7 @@ const calcDisplayBalance = function (accMovements) {
     }, 0);
     labelBalance.textContent = `${balance}€`;
 }
-calcDisplayBalance(account1.movements)
+// calcDisplayBalance(account1.movements)
 
 // // Maximum Value
 // const maximum = movements.reduce((acc, cur) => {
@@ -326,25 +326,25 @@ calcDisplayBalance(account1.movements)
 // console.log(totalDepositsInUsd);
 
 
-const calcDisplaySummary = function (movements) {
-    const income = movements
+const calcDisplaySummary = function (account) {
+    const income = account.movements
         .filter(mov => mov > 0)
         .reduce((acc, curMov) => acc + curMov, 0);
     labelSumIn.textContent = `${income}€`;
 
-    const outcome = movements
+    const outcome = account.movements
         .filter(mov => mov < 0)
         .reduce((acc, curMov) => acc + curMov, 0);
     labelSumOut.textContent = `${Math.abs(outcome)}€`;
 
-    const interest = movements
+    const interest = account.movements
         .filter(mov => mov > 0)
-        .map(deposit => (deposit * 1.2) / 100)
+        .map(deposit => (deposit * account.interestRate) / 100)
         .filter(interest => interest > 1)
         .reduce((acc, deposit) => acc + deposit, 0)
     labelSumInterest.textContent = `${(interest)}€`
 }
-calcDisplaySummary(account1.movements)
+// calcDisplaySummary(account1.movements)
 
 // REMARKS: We should not overuse chaining one after other, it can cause performance issue and debugging problem
 // We should it opitmizely use.
@@ -363,4 +363,47 @@ calcDisplaySummary(account1.movements)
 
 // const account = accounts.find(account => account.owner === 'Riya Singh');
 // console.log(account);
+
+
+/////////////////////////////////////////////////////////////////////////////
+///////////////////// Implementing Login //////////////////////////
+
+// Event Listener
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+    // Prevent form from submitting and refreshing again
+    e.preventDefault();
+    // console.log('LOGINED');
+    currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+    if (Number(inputLoginPin.value) === currentAccount?.pin) {
+        console.log(`LOGINED AS ${currentAccount.owner}`);
+
+        // Display UI and message
+        labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ').at(0)}👋`;
+        containerApp.style.opacity = 100;
+
+        // Display movements
+        displayMovements(currentAccount.movements);
+
+        // Display Balance
+        calcDisplayBalance(currentAccount.movements);
+
+        // Display Summary
+        calcDisplaySummary(currentAccount);
+
+        // Clear input Username PIN
+        inputLoginUsername.value = inputLoginPin.value = ``;
+        // Remove the cursor from the PIN input
+        inputLoginPin.blur();
+
+
+    } else {
+        alert(`Wrong Username or PIN. Try Again`);
+        containerApp.style.opacity = 0;
+        inputLoginPin.value = inputLoginUsername.value = ``;
+        inputLoginUsername.focus();
+    }
+});
+
 
