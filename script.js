@@ -450,3 +450,28 @@ btnTransfer.addEventListener('click', function (e) {
 
 });
 
+
+///////////////////// The find Method /////////////////////////
+
+btnClose.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    if (inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
+        alert(`You are about to delete this account..!`)
+        const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+
+        // Delete account
+        accounts.splice(index, 1);
+
+        // Hide UI
+        containerApp.style.opacity = 0;
+
+        // Clear close inputs
+        inputCloseUsername.value = inputClosePin.value = ``;
+
+        // Set up LOGIN welcome
+        labelWelcome.textContent = `Log in to get started`;
+
+    }
+})
+
