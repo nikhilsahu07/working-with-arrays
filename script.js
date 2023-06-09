@@ -475,3 +475,57 @@ btnClose.addEventListener('click', function (e) {
     }
 })
 
+
+// ////////////////////// Some and Every Method //////////////////////////////////
+
+// /////// some method
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(movements);
+
+// // Equality
+// console.log(movements.includes(-400));
+
+// // Condition
+// console.log(movements.some(mov => mov === -400))
+
+// const anyDeposit = movements.some(mov => mov > 0)
+// console.log(anyDeposit);
+
+// // Project Request Loan
+
+btnLoan.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const loanAmount = Number(inputLoanAmount.value);
+
+    if (loanAmount > 0 && currentAccount.movements.some(mov => mov > loanAmount * 0.1)) {
+
+        alert(`Amount of ${loanAmount}€ is successfully granted to your account..💰`)
+        // Add positive movements
+        currentAccount.movements.push(loanAmount);
+
+        // Update UI
+        updateUI(currentAccount);
+
+        // Clear input field
+        inputLoanAmount.value = ``;
+        inputLoanAmount.blur();
+
+
+    }
+})
+
+// ////// Every Method
+
+// console.log(movements.every(mov => mov > 0));
+// console.log(account4.movements.every(mov => mov > 0));
+
+// // Separate callbacks
+
+// const deposit = function (mov) {
+//     return mov > 0;
+// }
+// console.log(account4.movements.every(deposit));
+// console.log(account4.movements.some(deposit));
+// console.log(account4.movements.filter(deposit));
+
