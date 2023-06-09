@@ -599,3 +599,39 @@ btnSort.addEventListener('click', function (e) {
     displayMovements(currentAccount.movements, !sorted);
     sorted = !sorted;
 });
+
+
+// //////////////////////// More ways of creating and Filling Arrays ////////////////////
+
+// console.log([1, 2, 3, 4, 5, 6, 7, 8]);
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7, 8));
+
+// const x = new Array(8);
+// console.log(x);
+
+// // console.log(x.map(a => a + 1)); //Doesn't perform on any methods
+
+// //fill(element, startIndex, endIndex)
+// x.fill(1, 2, 6)
+// console.log(x)
+
+// // Array.from(length, Callbackfunction)
+// const y = Array.from({ length: 7 }, (_, i) => i + 1); // '_' for the variable that we don't use anywhere
+// console.log(y);
+
+// //All iterables can converted to real Array using Array.from()
+
+// document.querySelector('.logo').addEventListener('click', function () {
+//     const movementsUI = Array.from(document.querySelectorAll('.movements__value'),
+//         el => Number(el.textContent.replace('€', '')));
+//     console.log(movementsUI);
+
+// });
+
+// const movementsUI2 = Array.from(document.querySelectorAll('.movements__value'),
+//     el => Number(el.textContent.replace('€', '')));
+
+// console.log(movementsUI2);
+
+// // console.log(movementsUI.map(el => el.textContent.replace('€', '')));
+
