@@ -187,9 +187,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 ///////////////////////// Creating DOM Elements ////////////////////////////////
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
     containerMovements.innerHTML = ``; //innHTML returns the whole div class with their tags.. the whole html
     // containerMovements.textContent = ``; //it only returns the text inside the tags
+
+    const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
     movs.forEach(function (mov, i) {
         const transferType = mov > 0 ? 'deposit' : 'withdrawal';
@@ -554,3 +556,46 @@ btnLoan.addEventListener('click', function (e) {
 
 // console.log(totalDeposits2);
 
+
+// ////////////////////// SORTING ARRAYS //////////////////////////
+
+// // Strings
+// const owners = accounts.map(acc => acc.owner);
+
+// console.log(owners.sort()); //Mutate the array
+
+// console.log(owners);
+
+// // Numbers
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// // return < 0 --> no switching of elements a b
+// // return > 0 --> switching of elements b a
+
+// //Ascending Order
+// movements.sort((a, b) => {
+//     if (a > b) return 1;
+//     if (a < b) return -1; //Swtichning
+// });
+
+// console.log(movements);
+
+// //Descending order
+// movements.sort((a, b) => {
+//     if (a < b) return 1;
+//     if (a > b) return -1; //Switching
+// })
+
+// console.log(movements);
+
+// console.log(movements.sort((a, b) => a - b));
+
+
+///// Sorting Movements
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+    e.preventDefault();
+    displayMovements(currentAccount.movements, !sorted);
+    sorted = !sorted;
+});
