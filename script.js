@@ -190,7 +190,8 @@ const inputClosePin = document.querySelector('.form__input--pin');
 const displayMovements = function (movements) {
     containerMovements.innerHTML = ``; //innHTML returns the whole div class with their tags.. the whole html
     // containerMovements.textContent = ``; //it only returns the text inside the tags
-    movements.forEach(function (mov, i) {
+
+    movs.forEach(function (mov, i) {
         const transferType = mov > 0 ? 'deposit' : 'withdrawal';
         const movmentHtmlRow = `
         <div class="movements__row">
@@ -528,4 +529,28 @@ btnLoan.addEventListener('click', function (e) {
 // console.log(account4.movements.every(deposit));
 // console.log(account4.movements.some(deposit));
 // console.log(account4.movements.filter(deposit));
+
+
+// //////////////////// flat and flatMap method ////////////////////////////
+
+// // flat
+// const arr = [[1, 2, 3], [4, 5], 6, 7, [8, 9], 0];
+// console.log(arr.flat())
+
+// const arrDeep = [[[1, [2, 3]], [4, 5], 6, 7, [8, 9], 0]]
+// console.log(arrDeep.flat(3));
+
+// const totalDeposits = accounts
+//     .map(acc => acc.movements)
+//     .flat()
+//     .reduce((acc, cur) => acc + cur);
+
+// console.log(totalDeposits);
+
+// // flatMap
+// const totalDeposits2 = accounts
+//     .flatMap(acc => acc.movements)
+//     .reduce((acc, cur) => acc + cur);
+
+// console.log(totalDeposits2);
 
