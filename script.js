@@ -635,3 +635,80 @@ btnSort.addEventListener('click', function (e) {
 
 // // console.log(movementsUI.map(el => el.textContent.replace('€', '')));
 
+
+// ////////////////////////// Array Methods Practice /////////////////////////
+
+// // 1.
+// const bankWithdrawals = accounts
+//     .flatMap(acc => acc.movements)
+//     // .map(acc => acc.movements)
+//     // .flat()
+//     .filter(transc => transc < 0)
+//     .reduce((acc, transc) => acc + transc, 0);
+
+// console.log(bankWithdrawals);
+
+// // 2.
+// // const numDeposits1000 = accounts
+// //     .flatMap(acc => acc.movements)
+// //     .filter(transc => transc >= 1000)
+// //     .length;
+
+// const numDeposits1000 = accounts
+//     .flatMap(acc => acc.movements)
+//     // .filter(transc => transc >= 1000)
+//     // .reduce((acc, transc, i) => acc + 1, 0)
+//     .reduce((count, transc) => transc >= 1000 ? count + 1 : count, 0)
+
+// console.log(numDeposits1000);
+
+// // prefixed ++ operator and suffixed ++ operator
+// let a = 10;
+// console.log(a++); // increment by and after another call it returns
+// console.log(a);
+
+// console.log(++a); //increments by 1 and returns it immediately
+
+// // 3.
+// // const sums = {
+// //     deposits: 0,
+// //     withdrawals: 0,
+// // };
+
+// // const something = accounts
+// //     .flatMap(acc => acc.movements)
+// //     .reduce((acc, transc) => transc > 0 ? sums.deposits = acc + 1 : sums.withdrawals = acc + 1, 0);
+
+// // console.log(sums);
+
+
+// const sums = accounts
+//     .flatMap(acc => acc.movements)
+//     .reduce(
+//         (sums, curTransc) => {
+//             // curTransc > 0 ? sums.deposit += curTransc : sums.withdrawals += curTransc;
+//             sums[curTransc > 0 ? `deposit` : `withdrawals`] += curTransc;
+//             return sums
+//         },
+//         { deposit: 0, withdrawals: 0 });
+
+// console.log(sums);
+
+// // 4.
+
+// const convertTitleCase = function (title) {
+//     const capitalize = w => w[0].toUpperCase() + w.slice(1).toLowerCase()
+//     const exception = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+//     const titleCase = title
+//         .toLowerCase()
+//         .split(' ')
+//         .map(word => exception.includes(word) ? word : capitalize(word))
+//         .join(' ');
+
+//     return titleCase;
+// };
+
+// console.log(convertTitleCase(`this is a nice title`));
+// console.log(convertTitleCase(`this is a LONG title but not TOO long`));
+// console.log(convertTitleCase(`and here is another title`));
+
